@@ -1,40 +1,54 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(
-    MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Hello Flutter',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Hello Flutter'),
-        ),
-        body: StepFlutter(),
-      ),
-    ),
-  );
+    runApp(SampleApp());
 }
 
-class StepFlutter extends StatelessWidget {
+class SampleApp extends StatelessWidget {
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        color: Colors.blueAccent,
-        height: 100.0,
-        width: 300.0,
-        child: Center(
-          child: Text(
-            'JohnSnow!',
-            style: TextStyle(
-              color: Colors.yellow,
-              fontSize: 40.0,
-              fontStyle: FontStyle.italic,
-              ),
-            textAlign: TextAlign.center,
-          ),
-        ),
+    return MaterialApp(
+      title: '30 Days of Flutter',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
+      home: SampleAppPage(),
     );
+  }
+}
+
+class SampleAppPage extends StatefulWidget {
+  SampleAppPage({Key key}) : super(key: key);
+
+  @override
+  _SampleAppPageState createState() => _SampleAppPageState();
+}
+
+class _SampleAppPageState extends State<SampleAppPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("30 Days of Flutter"),
+      ),
+      body: ListView(children: _getListData()),
+    );
+  }
+
+  _getListData() {
+    List<Widget> widgets = [];
+    for (int i = 1; i < 31; i++) {
+      widgets.add(GestureDetector(
+        child: Padding(
+          padding: EdgeInsets.all(20.0),
+          child: Text("Row $i"),
+        ),
+        onTap: () {
+          print('$i row tapped');
+        },
+      ));
+    }
+    return widgets;
   }
 }
